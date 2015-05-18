@@ -69,7 +69,7 @@ function get_id(id){
             elementu.name=nameu
         },
         error: function (data) {
-            window.alert("Error");
+            window.alert(data);
         }
     });
 }
@@ -144,13 +144,18 @@ function get() {
         dataType: 'json',
         success: function (data) {
             for ( i = data.length-1; i >=0; i--) {
-                $('<h2> ' + data[i].name + '</h2>').appendTo($('#getlist'));
+                /*
+                $('<div style="border:solid;border-color:black;box-shadow: 10px 10px 5px #888888"><h2> ' + data[i].name + '</h2>').appendTo($('#getlist'));
                 $('<strong> Director: </strong> ' + data[i].director + '<br>').appendTo($('#getlist'));
                 $('<strong> Language: </strong> ' + data[i].language + '<br>').appendTo($('#getlist'));
                 $('<strong> Type: </strong> ' + data[i].type + '<br>').appendTo($('#getlist'));
                 $('<strong> Description: </strong> ' + data[i].description + '<br>').appendTo($('#getlist'));
                 $('<paper-button id=' + data[i]._id + ' class="coloredDelete" raised="true" role="button" onclick="delete_id(id)">DELETE</paper-button> ').appendTo($('#getlist'));
-                $('<paper-button id=' + data[i]._id + ' class="colored" style="background-color:#ffcf24" raised="true" role="button" onclick="get_id(id)">UPDATE</paper-button> <hr>').appendTo($('#getlist'));
+                $('<paper-button id=' + data[i]._id + ' class="colored" style="background-color:#ffcf24" raised="true" role="button" onclick="get_id(id)">UPDATE</paper-button></div> <hr>').appendTo($('#getlist'));
+                */
+                $('<div  style="border:solid;border-color:#DDDDDD;box-shadow: 5px 5px 5px #e2d9d4"><h2> ' + data[i].name + '</h2><strong> Director: </strong> ' + data[i].director + '<br><strong> Language: </strong> ' + data[i].language + '<br><strong> Type: </strong> ' + data[i].type + '<br><strong> Description: </strong> ' + data[i].description + '<br><br><paper-button id=' + data[i]._id + ' class="coloredDelete" raised="true" role="button" onclick="delete_id(id)">DELETE</paper-button><paper-button id=' + data[i]._id + ' class="colored" style="background-color:#ffcf24" raised="true" role="button" onclick="get_id(id)">UPDATE</paper-button><br><br></div><br>').appendTo($('#getlist'));
+
+
 
             }
         },

@@ -14,49 +14,64 @@
 </head>
 <body ng-controller="mainController">
 	<div class="container">
-
-		<div class="jumbotron text-center"style="background-color: yellow">
+		<div class="jumbotron text-center"style="background-color: deepskyblue">
 			<h1>EXAMEN EA ANGULAR</h1>
 		</div>
 
         <div>
             <div>Filtro:</div>
             <input type="text" class="form-control input-lg text-center" style="width:200px" placeholder="Filtro" ng-value="filtro" ng-model="filtro.name"required>
-            <div>
+        </div>
 
 		<div class="row">
             <div class="col-sm-7">
                 <table class="table table-striped">
 					<tr class="info  text-center">
 						<td>Name</td>
-						<td>Username</td>
-						<td>password</td>
-						<td>Correo</td>
+						<td>Director</td>
+						<td>Language</td>
+						<td>Type</td>
+                        <td>Description</td>
+
 					</tr>
-					<tr class="text-center" ng-repeat="usuario in usuarios | filter:filtro " ng-click="selectUsuario(usuario)">
-						<td>{{usuario.name}}</td>
-						<td>{{usuario.username}}</td>
-						<td>{{usuario.password}}</td>
-						<td>{{usuario.email}}</td>
-					</tr>
+					<tr class="text-center" ng-repeat="film in films | filter:filtro " ng-click="selectFilm(film)">
+						<td>{{film.name}}</td>
+						<td>{{film.director}}</td>
+						<td>{{film.language}}</td>
+						<td>{{film.type}}</td>
+                        <td>{{film.description}}</td>
+                    </tr>
 				</table>					
 			</div>
 			<div class="col-sm-5 text-center">
 				<form name="myForm">
 					<div class="form-group">
-                        <input type="text" class="form-control input-lg text-center" placeholder="Name" ng-model="newUsuario.name"required >
+                        <input type="text" class="form-control input-lg text-center" placeholder="Name" ng-model="newFilm.name"required ng-disabled="notchange">
 						<br>
-						<input type="text" class="form-control input-lg text-center" placeholder="Username" ng-model="newUsuario.username" required ng-disabled="notchange">
+                        <input type="text" class="form-control input-lg text-center" placeholder="Director" ng-model="newFilm.director" required>
 						<br>
-						<input type="text" class="form-control input-lg text-center" placeholder="Contraseña" ng-model="newUsuario.password" required>
-						<br>
-						<input type="text" class="form-control input-lg text-center" placeholder="Correo" ng-model="newUsuario.email" required>
+						<input type="text" class="form-control input-lg text-center" placeholder="Language" ng-model="newFilm.language" required>
+                        <br>
+                        <div class="col-xs-3">
+                        <select id="type" style="right:1px;font-size: 20px;alignment:left" ng-model="newFilm.type" required>
+                            <option value="Terror"selected="selected">Terror</option>
+                            <option value="Accion" >Accion</option>
+                            <option value="Biografica">Biografica</option>
+                            <option value="Animada">Animada</option>
+                            <option value="Amor">Amor</option>
+                        </select>
+                        </div>
+                        <div class="col-xs-9">
+						<input type="text" class="form-control input-lg text-center" placeholder="Type" ng-model="newFilm.type" required ng-init="isDisbale=false" disabled={{isDisabled}} >
+                        </div>
+                        <br>
+                        <input type="text" class="form-control input-lg text-center" placeholder="Description" ng-model="newFilm.description" required>
 					</div>
 
 					<!-- Acciones que podemos realizar en el formulario -->
 					<button type="submit" class="btn btn-success btn-lg" ng-click="registrarUsuario()" ng-disabled="myForm.$invalid || selected">Registrar</button>
-					<button type="submit" class="btn btn-warning btn-lg" ng-click="modificarUsuario(newUsuario)" ng-disabled="!newUsuario.name || !newUsuario.username || !newUsuario.password || !newUsuario.email ||!selected">Modificar</button>
-					<button type="submit" class="btn btn-danger btn-lg" ng-click="borrarUsuario(newUsuario)" ng-disabled="!newUsuario.name || !newUsuario.username || !newUsuario.password || !newUsuario.email ||!selected">Borrar</button>
+					<button type="submit" class="btn btn-warning btn-lg" ng-click="modificarUsuario(newFilm)" ng-disabled="!newFilm.name || !newFilm.director || !newFilm.language || !newFilm.type ||!selected">Modificar</button>
+					<button type="submit" class="btn btn-danger btn-lg" ng-click="borrarUsuario(newFilm)" ng-disabled="!newFilm.name || !newFilm.director || !newFilm.language || !newFilm.type ||!selected">Borrar</button>
 				</form>
 			</div>
 		</div>

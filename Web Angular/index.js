@@ -1,16 +1,16 @@
 angular.module('MainApp', [])
 
-
+$scope.always = true;
 function mainController($scope, $http) {
-	$scope.newUsuario = {};
-	$scope.usuarios = {};
+	$scope.newFilm = {};
+	$scope.films = {};
     $scope.filtro = {};
 	$scope.selected = false;
     $scope.notchange = false;
 
 	//GET
-	$http.get('http://localhost:3000/users/').success(function(data) {
-		$scope.usuarios = data;
+	$http.get('http://localhost:3000/films/').success(function(data) {
+		$scope.films = data;
 		console.log(data);
 	})
 	.error(function(data) {
@@ -18,16 +18,16 @@ function mainController($scope, $http) {
 	});
 
 	//DELETE
-	$scope.borrarUsuario = function(newUsuario) {
-		$http.delete('http://localhost:3000/user/' + $scope.newUsuario._id)
+	$scope.borrarUsuario = function(newFIlm) {
+		$http.delete('http://localhost:3000/film/' + $scope.newFilm._id)
 			.success(function(data) {
 				//Borramos los datos añadidos en los imput boxes
-				$scope.newUsuario = {};
+				$scope.newFilm = {};
 				$scope.selected = false;
-				$scope.usuarios = null;
+				$scope.films = null;
                 $scope.notchange =false;
 
-				$http.get('http://localhost:3000/users/').success(function(data) {
+				$http.get('http://localhost:3000/films/').success(function(data) {
 					$scope.usuarios = data;
 				})
 					.error(function(data) {
@@ -43,10 +43,11 @@ function mainController($scope, $http) {
 
 	//POST LISTA
 	$scope.registrarUsuario = function() {
-		$http.post('http://localhost:3000/users/', $scope.newUsuario)
+        console.log($scope.newFilm);
+		$http.post('http://localhost:3000/films/', $scope.newFilm)
 		.success(function(data) {
-				$scope.newUsuario = {};
-				$scope.usuarios.push(data);
+				$scope.newFilm = {};
+				$scope.films.push(data);
 				console.log(data);
 			})
 		.error(function(data) {
@@ -56,10 +57,10 @@ function mainController($scope, $http) {
 	};
 
 	//UPDATE LISTA
-	$scope.modificarUsuario = function(newUsuario) {
-		$http.put('http://localhost:3000/user/' + $scope.newUsuario._id, $scope.newUsuario)
+	$scope.modificarUsuario = function(newFilm) {
+		$http.put('http://localhost:3000/film/' + $scope.newFilm._id, $scope.newFilm)
 		.success(function(data) {
-				$scope.newUsuario = {};
+				$scope.newFilm = {};
 				$scope.selected = false;
 				$scope.notchange = false;
 			})
@@ -72,17 +73,11 @@ function mainController($scope, $http) {
 
 
 	// Función para coger el objeto seleccionado en la tabla
-	$scope.selectUsuario = function(usuario) {
-		$scope.newUsuario = usuario;
+	$scope.selectFilm = function(usuario) {
+		$scope.newFilm = usuario;
 		$scope.selected = true;
 		$scope.notchange = true;
-		console.log($scope.newUsuario, $scope.selected);
+		console.log($scope.newFilm, $scope.selected);
 	};
-
-    $scope.prueba = function() {
-        $scope.filterselected=true;
-        console.log($scope.filtro);
-
-    };
 
 }
